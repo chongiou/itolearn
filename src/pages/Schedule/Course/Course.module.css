@@ -1,0 +1,55 @@
+.homeworkItem {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: solid 1.5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.homeworkItem {
+  margin-bottom: 15px;
+}
+
+.homeworkItem h3 {
+  margin-top: 0;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.name h1 {
+  margin: 0;
+}
+
+.name button {
+  margin-right: 20px;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 5px 0;
+  }
+}
+
+.header {
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .homeworkItem {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}

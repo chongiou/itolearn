@@ -1,0 +1,121 @@
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.button {
+
+  --light-bg-hover: #f3f3f3bb;
+  --light-bg-active: #f3f3f3aa;
+  --light-bg: #f9f9f9;
+
+  --dark-bg-hover: #ffffff15;
+  --dark-bg-active: #33323065;
+  --dark-bg: #605f5f32;
+
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 9px 12px;
+  margin: 4px 0;
+  /* border: solid 1px #3333332e; */
+  border-radius: 5px;
+  box-shadow:
+    0 0px 0px 1px rgba(0, 0, 0, 0.1),
+    0 1px 0px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 0.92rem;
+  min-width: 88px;
+  transition: all 0.1s;
+
+  background-color: var(--light-bg);
+
+  &:hover:not(:disabled) {
+    background-color: var(--light-bg-hover);
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--light-bg-active);
+    opacity: 0.7;
+  box-shadow:
+    0 0px 0px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  &:disabled {
+    color: #263a4b4e;
+    opacity: 0.7;
+    cursor: auto;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--dark-bg);
+    border-top: solid 1px #b5b5b515;
+    box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.267);
+
+    &:hover:not(:disabled) {
+      background-color: var(--dark-bg-hover);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--dark-bg-active);
+    }
+
+    &:disabled {
+      color: #e5e5e54e;
+      opacity: 0.7;
+      cursor: auto;
+    }
+  }
+}
+
+/* TODO: 系统强调色 */
+.button[data-variant="primary"] {
+  background-color: #376e7e;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: #488293;
+  }
+
+  &:active:not(:disabled) {
+    background-color: rgb(79, 140, 158);
+    color: rgb(255, 255, 255, 0.8);
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #90c8cf;
+    color: black;
+
+    &:hover:not(:disabled) {
+      background-color: #7eb4bb;
+    }
+
+    &:active:not(:disabled) {
+      background-color: #71a5ac;
+      color: rgba(42, 42, 42, 0.8);
+      box-shadow: none;
+      opacity: 1;
+    }
+  }
+}
+
+.button[data-variant="danger"] {
+
+  /* TODO: 需要 light 版本 */
+  @media (prefers-color-scheme: dark) {
+    background-color: #d24540;
+
+    &:hover:not(:disabled),
+    &:active:not(:disabled) {
+      background-color: #c9342f;
+    }
+  }
+}

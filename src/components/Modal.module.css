@@ -1,0 +1,97 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.modalContent {
+  position: relative;
+  background-color: #ffffff;
+  backdrop-filter: blur(10px);
+  border-radius: 9px;
+  border: solid 1.4px #a6a5a5;
+  width: 370px;
+  max-width: 370px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform: scale(0.95);
+  opacity: 0;
+  animation: scaleIn 0.2s forwards;
+  z-index: 99;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 0px 0px 9px 9px;
+  border-top: solid 1.5px #e0e0e0;
+}
+
+.footer button {
+  /* TODO: 需要一个更好方式来设定按钮的宽度*/
+  min-width: 158px;
+}
+
+
+@keyframes scaleIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.header {
+  padding: 1.5rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.title+p {
+  font-size: 1rem;
+  margin: 20px 0px;
+  margin-bottom: 10px;
+}
+
+.body {
+  margin-bottom: 1rem;
+}
+
+.buttonPrimary {
+  background-color: #f2ccb6;
+  color: #e1e0e0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modalContent {
+    background-color: #2b2b2b;
+    border: solid 1.4px #393939;
+  }
+
+  .footer {
+    background-color: #202020;
+    border-top: none;
+  }
+
+  .buttonPrimary {
+    background-color: #e0ab97;
+    color: black !important;
+  }
+
+  /* .buttonPrimary:hover {
+    background-color: #cc9c8a !important;
+  } */
+}

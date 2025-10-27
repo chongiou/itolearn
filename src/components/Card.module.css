@@ -1,0 +1,92 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+
+  position: relative;
+  overflow: visible;
+
+  /* 背景样式 */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transition: all 0.1s ease;
+
+    border-radius: 5px;
+    border: solid 1.5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 255, 255, 0.7);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba(73, 73, 73, 0.3);
+      border: solid 1px #00000039;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+.scale {
+  &:hover::before {
+    border: solid 1.5px rgba(0, 0, 0, 0.08);
+    background-color: rgba(245, 245, 245, 0.4);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgb(110, 110, 110, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      inset: -1px -1.4px;
+    }
+  }
+}
+
+.left,
+.right {
+  position: relative;
+  z-index: 1;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.icon {
+  padding: 0 14px;
+  font-size: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  display: flex;
+}
+
+.info p {
+  margin: 2px;
+}
+
+.info p+p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.right {
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.right[data-rotate-90deg] svg {
+  transform: rotate(90deg);
+}
+
+.right[data-rotate-180deg] svg {
+  transform: rotate(180deg);
+}
+
+.right[data-rotate-270deg] svg {
+  transform: rotate(270deg);
+}

@@ -1,0 +1,29 @@
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.icon {
+  animation: spin 2s linear infinite;
+  opacity: 0.6;
+  --width: 25px;
+  width: var(--width);
+  height: var(--width);
+  svg {
+    --scale: calc(var(--width) / 25px);
+    transform: scale(var(--scale));
+    width: 100%;
+    height: 100%;
+  }
+}

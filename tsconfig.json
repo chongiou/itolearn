@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "#/*": [
+        "./*"
+      ]
+    },
+    "declaration": true,
+    "outDir": "dist",
+    "preserveSymlinks": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "node",
+    ],
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src",
+    "scripts/**/*",
+    "test/**/*",
+    "vite.config.ts",
+    "plugins/**/*",
+    "types/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

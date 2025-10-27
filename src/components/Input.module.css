@@ -1,0 +1,87 @@
+.inputContainer {
+  /* 容器负责圆角和底线 */
+  position: relative;
+  /* 让底线两端被圆角裁掉 */
+  overflow: hidden;
+  border-radius: 6px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.3s;
+  height: 35px;
+
+  @media (prefers-color-scheme: light) {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 0px 1.5px rgba(137, 137, 137, 1);
+  }
+
+
+  /* 底线 */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.3);
+
+    @media (prefers-color-scheme: light) {
+      background: rgba(109, 109, 109, 0.635);
+    }
+
+  }
+
+  & .input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    background: transparent;
+    color: #e6e6e6;
+    border: none;
+    min-height: 25px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
+
+  }
+
+
+  & .input::placeholder {
+    color: #bdbdbd;
+    transition: color 0.3s;
+  }
+
+  /* 焦点效果 */
+  & .input:focus {
+    background-color: rgb(15, 15, 15, 0.6);
+
+    @media (prefers-color-scheme: light) {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+  }
+
+  &:has(.input:focus)::after {
+    /* TODO: 系统强调色 */
+    background: #90c8cf;
+    height: 1.5px;
+
+    @media (prefers-color-scheme: light) {
+      background: #74a7ad;
+    }
+  }
+
+  &:has(.input:focus) {
+    box-shadow: 0px 0px 1px rgba(137, 137, 137, 0.5);
+
+    @media (prefers-color-scheme: light) {
+      box-shadow: 0px 0px 1.5px rgba(137, 137, 137, 1);
+    }
+  }
+
+  &:has(.input:focus) .input[data-variant="onFocusTransparentFont"]::placeholder {
+    color: transparent;
+  }
+}

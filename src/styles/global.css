@@ -1,0 +1,169 @@
+* {
+  user-select: none;
+
+  /* 滚动条宽度 */
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  /* 滚动条轨道颜色 */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #4b4b4b66;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #0000007e;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background: #2f2f2f3a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+
+    /* 滚动条滑块颜色 */
+    &::-webkit-scrollbar-thumb {
+      background: #ffffff66;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ffffff7e;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+      background: #ffffff3a;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+  }
+
+}
+
+body,
+html {
+  /* 这会导致背景模糊属性无法采样足够的颜色(采样不到窗口外的颜色), 进而导致模糊效果失效 */
+  background-color: #ffffff00;
+}
+
+:root {
+  font-family: system-ui;
+  color-scheme: light dark;
+  font-size: 0.9rem;
+  color: #213547;
+
+  @media (prefers-color-scheme: dark) {
+    color: #ffffff;
+  }
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin: 0 0 10px;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+p {
+  margin: 10px 0;
+}
+
+code {
+  font-family: Maple Mono NF CN Medium, Cascadia Mono, Cascadia Code semibold, Microsoft YaHei, system-ui;
+  user-select: text;
+  display: flex;
+  font-size: 0.90rem;
+  line-height: 20px;
+  font-weight: 20px;
+  background-color: #f5f5f5a9;
+  color: #2d2d2d;
+  border: solid 1.5px #b4b4b4a4;
+  border-radius: 6px;
+  padding: 8px 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  &::selection {
+    background-color: #b3d4fc92;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: #b3d4fc79;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #2323239a;
+    border: solid 1.5px #808080a4;
+    color: #e0e0e0;
+  }
+}
+
+.mica-element {
+  background: rgba(243, 243, 243, 0.5);
+  backdrop-filter: blur(60px) saturate(150%);
+  -webkit-backdrop-filter: blur(60px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+}
+
+.mica-element.dark {
+  background: rgba(32, 32, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #cccccc94;
+  border-radius: 5px;
+  background: #23282d;
+  cursor: pointer;
+  position: relative;
+  transition: all 0s;
+}
+
+input[type="checkbox"]:hover:not(:disabled) {
+  background: #353c42;
+}
+
+input[type="checkbox"]:checked:hover:not(:disabled) {
+  background-color: #7db7bf;
+  border-color: #7db7bf;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #90c8cf;
+  border-color: #90c8cf;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4.5px;
+  height: 10px;
+  /* 边框竟然是勾勾? */
+  border-right: 1.5px solid #23282d;
+  border-bottom: 1.5px solid #23282d;
+  transform: rotate(40deg);
+}
+
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

@@ -1,0 +1,61 @@
+.quizContainer {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .questionContainer {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .questionTitle {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .optionGroup {
+      margin: 10px 0;
+
+      label {
+        margin: 2px 0;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        background-color: rgba(208, 208, 208, 0.2);
+
+        &:hover {
+          background-color: rgba(208, 208, 208, 0.4);
+        }
+
+        @media (prefers-color-scheme: dark) {
+          background-color: rgba(255, 255, 255, 0.1);
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+          }
+        }
+
+        p {
+          margin: 0;
+        }
+
+        input {
+          margin: 0 20px;
+          margin-top: 2px;
+        }
+
+      }
+    }
+
+    .remark {
+      opacity: 0.5;
+    }
+  }
+}

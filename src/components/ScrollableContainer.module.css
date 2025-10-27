@@ -1,0 +1,17 @@
+.scrollableContainer {
+  width: 100%;
+  /* 
+    Flex 容器的子项默认 min-height: auto,
+    这意味着子项至少会与内容一样高,
+    所以即使设置了 overflow: overlay, 它仍然会"被内容撑开", 滚动条永远不出现,
+    因此滚动容器的父容器必须设置 min-height: 0 + flex: 1(可选)
+  */
+  height: 100%;
+  overflow-y: overlay;
+  overflow-x: hidden;
+  /* 给滚动条留空间 */
+  padding-right: 10px;
+  /* 为了让子元素能溢出而不 hidden , 使用负外边距把元素拉回来 */
+  padding-left: 10px;
+  margin-left: -10px;
+}

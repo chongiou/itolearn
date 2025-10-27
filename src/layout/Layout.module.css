@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  /* 减 padding-top */
+  height: calc(100vh - 50px);
+  width: 100vw;
+  overflow: hidden;
+  padding-top: 50px;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 10px;
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+}
+
+.main > * {
+  animation: slideUpFadeIn 0.2s;
+}
+
+/* 上滑淡入动画 */
+@keyframes slideUpFadeIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
