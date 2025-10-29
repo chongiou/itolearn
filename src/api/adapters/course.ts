@@ -111,7 +111,11 @@ export async function submitCheckin(interactiveClassroomId: string, checkinCode:
       Code: checkinCode.toString()
     })
   )
-  return resp.data?.msg === 'Success'
+  const msg = resp.data?.msg
+  return {
+    success: msg === 'Success' || msg === '该轮已签到！',
+    message: msg
+  }
 }
 
 export async function getCourseInfoFromScheduleId(scheduleId: string) {
