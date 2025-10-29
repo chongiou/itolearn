@@ -150,7 +150,7 @@ export function startLoader<T>(text = '加载中...', cb: (stop: Function) => T)
   return cb(stop)
 }
 
-export function truncateText(text: string, maxLength: number): string {
+export function truncateText(text: string, maxLength: number = 7): string {
   if (text.length <= maxLength) {
     return text
   }
