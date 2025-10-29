@@ -85,10 +85,10 @@ export async function getCheckinCode(checkId: string) {
       return resp.data.data.Code
     })
 
-  return Number(checkCode)
+  return checkCode // 不能转为数字, 因为有时签到码是 0 开头的
 }
 
-export async function submitCheckin(interactiveClassroomId: string, checkinCode: number) {
+export async function submitCheckin(interactiveClassroomId: string, checkinCode: string) {
   interface CheckIn {
     code: number
     msg: string
