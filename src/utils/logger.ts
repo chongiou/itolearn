@@ -172,16 +172,8 @@ export class Logger {
     })
   }
 
-  setLogOutputEventListener(fn: (message: string[]) => void) {
-    this.config.logOutputEventListeners = fn
-  }
-
-  setConfig(config: Partial<LoggerConfig>): void {
-    this.config = { ...this.config, ...config }
-  }
-
-  getConfig(): LoggerConfig {
-    return this.config
+  onLoggerOutput(eventListener: (message: string[]) => void) {
+    this.config.logOutputEventListeners = eventListener
   }
 
   info(...args: any[]): void {
@@ -214,7 +206,7 @@ export class Logger {
     this.output(messages)
   }
 
-  output(parts: string[]): void {
+  private output(parts: string[]): void {
     this.emitLogOutputEventListeners(parts)
     console.log(parts.join(' '))
   }
