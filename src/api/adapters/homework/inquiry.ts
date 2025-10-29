@@ -128,7 +128,7 @@ export async function submitInquiry(
 
   const resp = await itolearnClient.post('/webios/SubmitSurvey', new URLSearchParams(requestBody))
   return {
-    success: !!resp.data.status,
+    success: !!resp.data.status || resp.data.message === '提交成功！！', // TODO: 不知道为啥提交成功, 但 status 是 0, 有待观察
     message: resp.data.message as string
   }
 }
