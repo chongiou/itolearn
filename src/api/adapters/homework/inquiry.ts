@@ -37,10 +37,10 @@ function cleanInquiryData(htmlText: string): InquiryData {
   const description = document.querySelector('.c-top.inquiry p')?.textContent?.trim() ?? '⚠️: 未找到描述'
 
   const inquiryList = document.querySelector('#inquiryList') as HTMLElement | null
-  const operatorId = inquiryList?.dataset.operator
-  // cspell: disable-next-line
-  const teacherId = inquiryList?.dataset.teacherid
-  const chapterId = inquiryList?.dataset.chid
+  // NOTE: 无法使用 dataset , 因为 html 中的自定义属性名不符合规范和非标准, linkdom无法处理这种边界情况
+  const teacherId = inquiryList?.getAttribute('data-teacherId')
+  const operatorId = inquiryList?.getAttribute('data-operator')
+  const chapterId = inquiryList?.getAttribute('data-chid')
 
   const questions: InquiryQuestion[] = []
   const questionItems = inquiryList?.querySelectorAll('li') ?? []
