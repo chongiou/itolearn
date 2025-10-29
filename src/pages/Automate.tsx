@@ -9,11 +9,20 @@ import {
   loadAutomateEnabled
 } from '@/store/automate'
 import style from './Automate.module.css'
-import { createSignal, For, onMount } from 'solid-js'
+import { createEffect, createSignal, For, onMount } from 'solid-js'
 import ScrollableContainer from '@/components/ScrollableContainer'
 
 export default function Automate() {
   const [automateIsEnabled, setAutomateIsEnabled] = createSignal(automateEnabled())
+  let logContainer!: HTMLDivElement
+
+  createEffect(() => {
+    logs()
+    queueMicrotask(() => {
+      logContainer.scrollTop = logContainer.scrollHeight
+    })
+  })
+
   onMount(async () => {
     const enabled = await loadAutomateEnabled()
     setAutomateIsEnabled(enabled)
@@ -39,7 +48,7 @@ export default function Automate() {
         </Tab>
         <Tab title="日志">
           <code style={{ margin: '10px 0' }}>
-            <ScrollableContainer>
+            <ScrollableContainer ref={logContainer}>
               <For each={logs()}>
                 {(log) => {
                   return <p innerHTML={log}></p>
