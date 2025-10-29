@@ -89,7 +89,7 @@ export class ItolearnAutomate {
     await Promise.all(
       this.plugins.map((plugin) => {
         logger.log(`安装插件: ${plugin.name}`)
-        plugin.install(eventBus)
+        plugin.install(logger.createChild(plugin.name), eventBus)
       }),
     )
   }

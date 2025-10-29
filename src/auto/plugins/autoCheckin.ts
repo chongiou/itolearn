@@ -1,26 +1,35 @@
 import { getCheckinCode, getCheckinStatus, submitCheckin } from '@/api/adapters/course'
 import { Plugin } from '@/auto'
 import { TypedEventBus } from '../core/TypedEventBus'
-import { logger } from '@/auto/utils/logger'
+import { type Logger } from '@/utils/logger'
 
 export class AutoCheckinPlugin implements Plugin {
-  name = 'AutoCheckinPlugin'
+  name = '自动签到'
+  logger!: Logger
 
   async handleCheckin(course: any) {
     try {
       const { canCheckin, checkId } = await getCheckinStatus(course.interactiveClassroomId!)
-      if (!canCheckin) return
+      if (!canCheckin || !checkId) {
+        this.logger.error('现在无法签到, 因为没有签到id')
+        return
+      }
 
       const checkinCode = await getCheckinCode(checkId)
-      const success = await submitCheckin(course.interactiveClassroomId!, checkinCode)
-      logger.log(`[AutoCheckinPlugin] ${course.name}签到${success ? '成功' : '失败'}`)
+      const checkinResult = await submitCheckin(course.interactiveClassroomId!, checkinCode)
+      if (checkinResult.success) {
+        this.logger.success(`${course.name}签到成功`)
+      } else {
+        throw new Error(checkinResult.message)
+      }
     } catch (err) {
-      logger.error(`[AutoCheckinPlugin] ${course.name}签到失败:`, err)
+      this.logger.error(`${course.name}签到失败:`, err)
     }
   }
 
-  async install(eventBus: TypedEventBus) {
-    logger.log('[AutoCheckinPlugin] 安装内置插件')
+  async install(logger: Logger, eventBus: TypedEventBus) {
+    this.logger = logger
+
     eventBus.on('course:classStart', async (data) => {
       const { course } = data
       console.log(`[AutoCheckinPlugin] 课程 ${course.name} 开始上课`)
