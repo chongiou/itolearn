@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "@solidjs/router"
-import { Show, createSignal, For, Switch, Match, createResource } from "solid-js"
+import { Show, createSignal, For, Switch, Match, createResource, onMount } from "solid-js"
 import { getCourseHomeworks } from "@/api/services"
 import type { Course, Homework } from "@/api/types/models"
 import style from './Course.module.css'
@@ -7,6 +7,7 @@ import ScrollableContainer from "@/components/ScrollableContainer"
 import Loading from "@/components/Loading"
 import { getCheckinCode, getCheckinStatus } from "@/api/adapters/course"
 import Button from "@/components/Button"
+import { modal } from "@/components/Modal"
 
 function isCourseStarted(course: Course): course is Course & { interactiveClassroomId: string; lessonId: string } {
   return course.status !== "notStarted"
@@ -16,6 +17,13 @@ export default function Course() {
   const location = useLocation()
   const navigate = useNavigate()
   const course = location.state as Course
+
+  onMount(async () => {
+    if (course.status !== 'ongoing' || !course.interactiveClassroomId || !course.lessonId) {
+      modal.alert('课程未开始或已结束，无法获取作业和签到信息。')
+      navigate('/schedule')
+    }
+  })
 
   // 作业类型和状态映射
   const HOMEWORK_STATUS = {
@@ -45,14 +53,16 @@ export default function Course() {
   const [homeworkList, setHomeworkList] = createSignal<Homework[]>([])
   const [loading, setLoading] = createSignal(false)
   const [error, setError] = createSignal<string>()
-  const [checkinStatus] = createResource(() => getCheckinStatus(course.interactiveClassroomId!))
+  const [checkinStatus] = createResource(() => {
+    return getCheckinStatus(course.interactiveClassroomId!)
+  })
   const [checkinCode] = createResource(
     () => checkinStatus(),
     async (checkinStatus) => {
       if (course.status === 'completed') {
         return '无法取得签到码, 因为课程已关闭'
       }
-      return getCheckinCode(checkinStatus.checkId)
+      return getCheckinCode(checkinStatus.checkId!)
     }
   )
 
