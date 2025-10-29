@@ -1,4 +1,4 @@
-import type { Logger } from "@/auto/utils/logger"
+import type { Logger } from "@/utils/logger"
 import type { PollerState } from "../types"
 
 export interface StateStorage {

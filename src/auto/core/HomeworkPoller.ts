@@ -3,19 +3,18 @@ import type { StateManager } from "../storage/StateManager"
 import type { TimeHelper } from "../utils/TimeHelper"
 import type { TypedEventBus, Events } from "./TypedEventBus"
 import type { Homework, Course, DayPlan } from "../types"
-import { logger, type Logger } from '@/auto/utils/logger'
-import { truncateText } from "@/utils"
+import { type Logger } from '@/utils/logger'
 
 // 该轮询器是为了在课内尽快取得新作业, 适用于教师要求课内完成作业的情况
 export class HomeworkPoller {
   private pollers: Map<string, NodeJS.Timeout> = new Map()
-  private logger: Logger = logger.createChild('HomeworkPoller')
 
   constructor(
     private eventBus: TypedEventBus,
     private stateManager: StateManager,
     private timeHelper: TimeHelper,
     private getCourseHomeworks: (interactiveClassroomId: string, scheduleId: string, lessonId: string) => Promise<Homework[]>,
+    private logger: Logger,
     private defaultPollInterval = 2 * 60 * 1000,
   ) {
     this.setupEventListeners()

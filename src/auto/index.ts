@@ -8,14 +8,14 @@ import { TypedEventBus } from './core/TypedEventBus'
 import { classSchedule } from './config/classSchedule'
 import { holidays } from './config/holidays'
 import { IS_NODE, IS_TAURI } from '@/env'
-import { logger } from '@/auto/utils/logger'
+import { logger, type Logger } from '@/utils/logger'
 import { AutoCheckinPlugin } from './plugins/autoCheckin'
 import { AutoHomeworkPlugin } from './plugins/autoHomework'
 
 export interface Plugin {
   name: string
   description?: string
-  install: (eventBus: TypedEventBus) => Promise<void>
+  install: (logger: Logger, eventBus: TypedEventBus) => Promise<void>
 }
 
 export class ItolearnAutomate {
@@ -24,18 +24,18 @@ export class ItolearnAutomate {
   private plugins: Plugin[] = [new AutoCheckinPlugin(), new AutoHomeworkPlugin()]
 
   public setEventListenerForLogOutput(fn: (message: string[]) => void) {
-    logger.setLogOutputEventListener(fn)
+    logger.onLoggerOutput(fn)
   }
 
   public async createPoller() {
-    const stateManager = new StateManager()
+    const stateManager = new StateManager(undefined, undefined, logger.createChild("StateManager"))
     const eventBus = new TypedEventBus()
     const timeHelper = new TimeHelper(holidays, classSchedule)
     const differ = new ScheduleDiffer()
 
-    const schedulePoller = new SchedulePoller(eventBus, stateManager, timeHelper, differ, getSchedule)
+    const schedulePoller = new SchedulePoller(eventBus, stateManager, timeHelper, differ, getSchedule, logger.createChild('SchedulePoller'))
 
-    const homeworkPoller = new HomeworkPoller(eventBus, stateManager, timeHelper, getCourseHomeworks)
+    const homeworkPoller = new HomeworkPoller(eventBus, stateManager, timeHelper, getCourseHomeworks, logger.createChild('HomeworkPoller'))
 
     const stopPoller = async () => {
       logger.log('正在关闭...')

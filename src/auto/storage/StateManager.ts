@@ -1,15 +1,15 @@
 import type { WeeklySchedule } from "../types"
 import { type PollerState } from "./types"
 import { PlatformStateStorage } from "./PlatformStateStorage"
-import { logger, type Logger } from "@/auto/utils/logger"
+import { type Logger } from "@/utils/logger"
 
 export class StateManager {
-  private logger: Logger = logger.createChild("StateManager")
   private state: PollerState
 
   constructor(
     private stateStorage = PlatformStateStorage.create(),
     private immediatelyLoadState = true,
+    private logger: Logger
   ) {
     this.state = {
       lastSchedulePoll: null,

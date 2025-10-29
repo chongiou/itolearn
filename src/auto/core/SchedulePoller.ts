@@ -3,11 +3,10 @@ import type { StateManager } from "../storage/StateManager"
 import type { TimeHelper } from "../utils/TimeHelper"
 import type { WeeklySchedule } from "../types"
 import type { Events, TypedEventBus } from "./TypedEventBus"
-import { logger, type Logger } from "@/auto/utils/logger"
+import { type Logger } from "@/utils/logger"
 import { DateTime } from "luxon"
 
 export class SchedulePoller {
-  private logger: Logger = logger.createChild('SchedulePoller')
   private isRunning = false
   private timeoutId?: NodeJS.Timeout
 
@@ -16,7 +15,8 @@ export class SchedulePoller {
     private stateManager: StateManager,
     private timeHelper: TimeHelper,
     private differ: ScheduleDiffer,
-    private getWeeklySchedule: (week?: number, relative?: boolean) => Promise<{ semesterWeek: number; weeklySchedule: WeeklySchedule }>
+    private getWeeklySchedule: (week?: number, relative?: boolean) => Promise<{ semesterWeek: number; weeklySchedule: WeeklySchedule }>,
+    private logger: Logger
   ) { }
 
   async start(): Promise<void> {
