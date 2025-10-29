@@ -23,15 +23,18 @@ export async function sendSimpleQAComment(homeworkId: string, comment: string) {
 }
 
 export async function getSimpleQACommentList(interactiveClassroomId: string, homeworkId: string) {
+  const fileServerToken = await getFileServerTokenWithCache()
+
   const resp = await itolearnClient.get<RawGetSimpleQACommentListResponse>('/api/iCActivities', {
     params: {
       icid: interactiveClassroomId,
       taskIcaID: homeworkId
     },
     headers: {
-      token: await getFileServerTokenWithCache(),
+      token: fileServerToken,
     }
   })
+
   return cleanSimpleQACommentList(resp.data)
 }
 
